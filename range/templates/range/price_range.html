@@ -1,1 +1,27 @@
-<p>{{displayprice.name}}</p>
+<h1>Index</h1>
+<form method="post">
+    {% csrf_token %}
+    <select name="range">
+         {% for range in ranges %}
+             <option
+              value="{{ range }}"
+              {% if selected_range == range %}
+                  selected="selected"
+              {% endif %}
+             >{{ range }}</option>
+         {% endfor %}
+    </select>
+    <input type="submit" value="Select">
+</form>
+{% if selected_range %}
+  <p>
+    Nice, you selected: {{ selected_range }}!
+  </p>
+  <p>
+    Restaurants in this region:
+  </p>
+
+     {% for rest in range_price %}
+       <p>{{ rest.price }}</p>
+     {% endfor %}
+{% endif %}

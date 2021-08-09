@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from range import views
-from range.views import displayvalue
+
+#from range.views import displayvalue
+#from region import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_view, name='showobj'),
-    path('displayvalue/<int:id>/', displayvalue, name='displayvalues'),
+    path('', views.showobj, name='showobj'),
+    #path('', views.index_view, name='index'),
+    #path('displayvalue/<int:id>/', displayvalue, name='displayvalues'),
 ]

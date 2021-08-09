@@ -1,0 +1,28 @@
+<h1>Index</h1>
+<form method="post">
+    {% csrf_token %}
+    <select name="region">
+         {% for region in regions %}
+             <option
+              value="{{ region }}"
+              {% if selected_region == region %}
+                  selected="selected"
+              {% endif %}
+             >{{ region }}</option>
+         {% endfor %}
+    </select>
+    <input type="submit" value="Select">
+</form>
+{% if selected_region %}
+  <p>
+    Nice, you selected: {{ selected_region }}!
+  </p>
+  <p>
+    Restaurants in this region:
+  </p>
+  <ul>
+     {% for restaurant in restaurants %}
+       <li>{{ restaurant.restName }}</li>
+     {% endfor %}
+  </ul>
+{% endif %}
