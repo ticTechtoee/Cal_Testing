@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Range</title>
+</head>
+<body>
+<center>
+    <p>{{displayprice.name}}</p>
+    <select onchange="val()" id="select_id">
+        <option selected disabled="true">Select the Price Range</option>
+        {% for results in range %}
+        <option><a href="home.html"> {{results.name}} </a></option>
+        {% endfor %}
+    </select>
+</center>
+</body>
+</html>
