@@ -1,27 +1,103 @@
+<head xmlns="http://www.w3.org/1999/html">
+</head>
+<body>
+<center>
 <h1>Index</h1>
-<form method="post">
+    <form method="post">
     {% csrf_token %}
+ {% if selected_range %}
+       {% for rest in range_price %}
+        <label>Price for Square Feet(J20)</label><input name="J20" id="J20" value="{{ rest.price }}">
+     {% endfor %}
+{% endif %}
     <select name="range">
+         <option selected disabled="true">Select the Price Range</option>
          {% for range in ranges %}
-             <option
-              value="{{ range }}"
-              {% if selected_range == range %}
-                  selected="selected"
-              {% endif %}
-             >{{ range }}</option>
+             <option value="{{ range }}" {% if selected_range == range %} selected="selected" {% endif %}>{{ range }}</option>
          {% endfor %}
     </select>
     <input type="submit" value="Select">
 </form>
-{% if selected_range %}
-  <p>
-    Nice, you selected: {{ selected_range }}!
-  </p>
-  <p>
-    Restaurants in this region:
-  </p>
 
-     {% for rest in range_price %}
-       <p>{{ rest.price }}</p>
-     {% endfor %}
-{% endif %}
+    <label>Bedroom (C22)</label><input name="C22" id="C22"></br>
+    <label>Bathrooms (C23)</label><input name="C23" id="C23"></br>
+    <label>Living Room (C27)</label><input name="C27" id="C27"></br>
+    <label>Dining Room (C29)</label><input name="C29" id="C29"></br>
+    <label>Den/Family Room (C31)</label><input name="C31" id="C31"></br>
+    <label>Study (C33)</label><input name="C33" id="C33"></br>
+    <label>Game Room (C35)</label><input name="C35" id="C35"></br>
+    <label>Media Room (C37)</label><input name="C37" id="C37"></br>
+    <label>Laundry Room (C39)</label><input name="C39" id="C39"></br>
+    <label>Rooms With HW (C41)</label><input name="C41" id="C41"></br>
+    <label>Multiple Vanities (C44)</label><input name="C44" id="C44"></br>
+    <label>People (C48)</label><input name="C48" id="C48"></br>
+    <label>Pets (C50)</label><input name="C50" id="C50"></br>
+    <label>Number of Level (C52)</label><input name="C52" id="C52"></br>
+
+
+    <label>J54(empty value)</label><input name="J54" id="J54" value="0"></br>
+
+
+    <label>J59(Total Weakly Service)</label><input name="J59" id="J59" ></br>
+
+     <label>AD59 (Sales Tax Amount)</label><input name="AD59" id="AD59" value="4.0"></br>
+     <label>P59 (Sales Tax)</label><input name="P59" id="P59" ></br>
+
+     <label>R59 (Total)</label><input name="R59" id="R59"></br>
+
+     <label>1.2</label><input name="V1.2" id="V1.2" value="1.2"></br>
+
+     <label>Result</label><input name="N7" id="N7"></br>
+
+    <button type="button" onclick="J59Value();P59Value();R59Value();N7();">Click Me</button>
+</center>
+<script>
+J59Value = function()
+{
+    var J20 = document.getElementById('J20').value;
+    var C22 = document.getElementById('C22').value;
+    var C23 = document.getElementById('C23').value;
+    var C27 = document.getElementById('C27').value;
+    var C29 = document.getElementById('C29').value;
+    var C31 = document.getElementById('C31').value;
+    var C33 = document.getElementById('C33').value;
+    var C35 = document.getElementById('C35').value;
+    var C37 = document.getElementById('C37').value;
+    var C39 = document.getElementById('C39').value;
+    var C41 = document.getElementById('C41').value;
+    var C44 = document.getElementById('C44').value;
+    var C48 = document.getElementById('C48').value;
+    var C50 = document.getElementById('C50').value;
+    var C52 = document.getElementById('C52').value;
+    var J54 = document.getElementById('J54').value;
+
+    document.getElementById('J59').value = parseInt(J20) + parseInt(C22) + parseInt(C23) + parseInt(C27) + parseInt(C29) + parseInt(C31) + parseInt(C33) + parseInt(C35) + parseInt(C37) + parseInt(C39) + parseInt(C41) + parseInt(C44) + parseInt(C48) + parseInt(C50) + parseInt(C52) + parseInt(J54);
+
+}
+
+P59Value = function()
+{
+    var J59 = document.getElementById('J59').value;
+    var AD59 = document.getElementById('AD59').value;
+    document.getElementById('P59').value = parseInt(J59) * parseInt(AD59)/100;
+
+}
+
+R59Value = function()
+{
+    var P59 = document.getElementById('P59').value;
+    var J59 = document.getElementById('J59').value;
+    document.getElementById('R59').value = parseInt(P59) + parseInt(J59);
+
+}
+
+N7 = function()
+{
+    var V1Point2 = document.getElementById('V1.2').value;
+    var R59 = document.getElementById('R59').value;
+    document.getElementById('N7').value = parseFloat(V1Point2) * parseFloat(R59);
+}
+
+
+</script>
+</body>
