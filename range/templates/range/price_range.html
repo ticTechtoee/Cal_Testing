@@ -16,8 +16,9 @@
              <option value="{{ range }}" {% if selected_range == range %} selected="selected" {% endif %}>{{ range }}</option>
          {% endfor %}
     </select>
-    <input type="submit" value="Select">
+    <input type="submit" value="Select" name="submit_for_Price_range">
 </form>
+
 
     <label>Bedroom (C22)</label><input name="C22" id="C22"></br>
     <label>Bathrooms (C23)</label><input name="C23" id="C23"></br>
@@ -50,6 +51,36 @@
      <label>Result</label><input name="N7" id="N7"></br>
 
     <button type="button" onclick="J59Value();P59Value();R59Value();N7();">Click Me</button>
+
+
+
+
+<form name="price_rates" method="post">
+     {% csrf_token %}
+
+    <input name="rate1" value="{{ rates1.rate }}"><br>
+    <input name="rate2" value="{{ rates2.rate }}"><br>
+    <input name="rate3" value="{{ rates3.rate }}"><br>
+    <input name="rate4" value="{{ rates4.rate }}"><br>
+
+
+    <input type="submit" value="save" name="update_value">
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </center>
 <script>
 J59Value = function()
